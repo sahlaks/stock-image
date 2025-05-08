@@ -12,7 +12,7 @@ const createServer = () => {
     const app: express.Application = express();
 
     const corsOptions = {
-      origin: "https://stock-image-xi.vercel.app",
+      origin: ["https://stock-image-xi.vercel.app","http://localhost:5173"],
       credentials: true,
       methods: "GET,PUT,PATCH,POST,DELETE",
       allowedHeaders: ["Content-Type","Authorization"],
