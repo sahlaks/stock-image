@@ -12,7 +12,7 @@ const createServer = () => {
     const app: express.Application = express();
 
     const corsOptions = {
-      origin: "https://pic-cloud-psi.vercel.app",
+      origin: "https://stock-image-xi.vercel.app/",
       credentials: true,
       methods: "GET,PUT,PATCH,POST,DELETE",
       allowedHeaders: "Content-Type,Authorization",
