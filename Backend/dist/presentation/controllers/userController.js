@@ -28,18 +28,6 @@ class UserController {
                 const result = yield this.UserUseCase.registrationUser(req.body);
                 if (result.status) {
                     res.cookie("access_token", result.accesstoken, {
-<<<<<<< HEAD
-                        httpOnly: true,
-                        secure: true,
-                        sameSite: "none",
-                        path: "/",
-                    });
-                    res.cookie("refresh_token", result.refreshtoken, {
-                        httpOnly: true,
-                        secure: true,
-                        sameSite: "none",
-                        path: "/",
-=======
                         maxAge: 48 * 60 * 60 * 1000,
                         httpOnly: true,
                         secure: true,
@@ -50,7 +38,6 @@ class UserController {
                         httpOnly: true,
                         secure: true,
                         sameSite: "none",
->>>>>>> 661e1b656fd0f1864ef756ee9ab589d7bf47cc43
                     });
                     return res
                         .status(statusCode_1.ENUM.OK)
@@ -70,24 +57,15 @@ class UserController {
             try {
                 console.log(req);
                 const result = yield this.UserUseCase.loginUserWithDat(req);
-<<<<<<< HEAD
-                console.log(result);
-                if (result.status) {
-                    res.cookie("access_token", result.accesstoken, {
-=======
                 if (result.status) {
                     res.cookie("access_token", result.accesstoken, {
                         maxAge: 48 * 60 * 60 * 1000,
->>>>>>> 661e1b656fd0f1864ef756ee9ab589d7bf47cc43
                         httpOnly: true,
                         secure: true,
                         sameSite: "none",
                     });
                     res.cookie("refresh_token", result.refreshtoken, {
-<<<<<<< HEAD
-=======
                         maxAge: 5 * 60 * 1000,
->>>>>>> 661e1b656fd0f1864ef756ee9ab589d7bf47cc43
                         httpOnly: true,
                         secure: true,
                         sameSite: "none",
@@ -187,18 +165,6 @@ class UserController {
                 const { id, title } = req.body;
                 const imageFiles = req.files;
                 let imageUrl;
-<<<<<<< HEAD
-                if (imageFiles) {
-                    const imageBuffer = imageFiles[0].buffer;
-                    imageUrl = yield (0, cloudinaryService_1.uploadImage)(imageBuffer, "picCloud");
-                }
-                const imageToUpdate = {
-                    id,
-                    userId,
-                    imageUrl,
-                    title
-                };
-=======
                 if (imageFiles && imageFiles.length > 0) {
                     const imageBuffer = imageFiles[0].buffer;
                     imageUrl = yield (0, cloudinaryService_1.uploadImage)(imageBuffer, "picCloud");
@@ -219,7 +185,6 @@ class UserController {
                         title
                     };
                 }
->>>>>>> 661e1b656fd0f1864ef756ee9ab589d7bf47cc43
                 const result = yield this.UserUseCase.updateImage(imageToUpdate);
                 if (result.status)
                     return res.status(statusCode_1.ENUM.OK).json({ success: true, image: result.data, message: result.message });

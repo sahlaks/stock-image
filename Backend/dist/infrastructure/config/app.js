@@ -14,10 +14,10 @@ const createServer = () => {
     try {
         const app = (0, express_1.default)();
         const corsOptions = {
-            origin: "https://pic-cloud-psi.vercel.app",
+            origin: "https://stock-image-xi.vercel.app",
             credentials: true,
             methods: "GET,PUT,PATCH,POST,DELETE",
-            allowedHeaders: "Content-Type,Authorization",
+            allowedHeaders: ["Content-Type", "Authorization"],
         };
         // Apply CORS middleware
         app.use((0, cors_1.default)(corsOptions));
