@@ -1,0 +1,4 @@
+{"watch":["src"],
+"exp":"ts",
+"ignore":["dist"],
+"exec":"tsc&&node dist/server.js"}

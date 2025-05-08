@@ -1,0 +1,26 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const userRepository_1 = require("../../infrastructure/repositories/userRepository");
+const userUsecases_1 = require("../../usecases/userUsecases");
+const userController_1 = require("../controllers/userController");
+const upload_1 = __importDefault(require("../../infrastructure/services/upload"));
+const tokenValidation_1 = require("../middlewares/tokenValidation");
+const userRouter = express_1.default.Router();
+const userRepository = new userRepository_1.UserRepository();
+const userUsecase = new userUsecases_1.UserUseCase(userRepository);
+const controller = new userController_1.UserController(userUsecase);
+userRouter.post('/signup', (req, res, next) => { controller.createUser(req, res, next); });
+userRouter.post('/login', (req, res, next) => { controller.loginUser(req, res, next); });
+userRouter.post('/uploads', tokenValidation_1.validateTokens, upload_1.default, (req, res, next) => { controller.imageUpload(req, res, next); });
+userRouter.get('/fetch-images', tokenValidation_1.validateTokens, (req, res, next) => { controller.fetchImages(req, res, next); });
+userRouter.delete('/delete-image/:id', tokenValidation_1.validateTokens, (req, res, next) => { controller.deleteImage(req, res, next); });
+userRouter.put('/edit-image', tokenValidation_1.validateTokens, upload_1.default, (req, res, next) => { controller.editImage(req, res, next); });
+userRouter.post('/position-update', tokenValidation_1.validateTokens, (req, res, next) => { controller.updatePositions(req, res, next); });
+userRouter.post('/reset-password', tokenValidation_1.validateTokens, (req, res, next) => { controller.resetPassword(req, res, next); });
+userRouter.post('/refreshToken', (req, res, next) => { controller.refreshToken(req, res, next); });
+userRouter.post('/logout', (req, res, next) => { controller.logoutUser(req, res, next); });
+exports.default = userRouter;
